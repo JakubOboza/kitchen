@@ -30,22 +30,22 @@ Vagrant::Config.run do |config|
   # to this Vagrantfile), and adding some recipes and/or roles.
   #
    config.vm.provision :chef_solo do |chef|
-     chef.cookbooks_path = "books"
+     chef.cookbooks_path = ["books"]
      chef.add_recipe  "apt"
      chef.add_recipe  "build-essential"
      chef.add_recipe  "emacs"
      chef.add_recipe  "git"
      chef.add_recipe  "boost"
      chef.add_recipe "apache2"
-     #chef.add_recipe "bluepill"
      chef.add_recipe  "openssl"
-     #chef.add_recipe "mongodb"
+     chef.add_recipe "mongodb::install"
+     chef.add_recipe "mongodb::configure"
      chef.add_recipe  "rvm::install"
      chef.add_recipe "couchdb::source"
      chef.add_recipe "our_gems"
      chef.add_recipe "redis"
 
-     chef.log_level = :debug
+     #chef.log_level = :debug
 
      chef.json.merge!({
        :rvm => {
