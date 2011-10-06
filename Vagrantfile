@@ -37,19 +37,24 @@ Vagrant::Config.run do |config|
      chef.add_recipe  "git"
      chef.add_recipe  "boost"
      chef.add_recipe "apache2"
-     chef.add_recipe "bluepill"
+     #chef.add_recipe "bluepill"
      chef.add_recipe  "openssl"
      #chef.add_recipe "mongodb"
-     #chef.add_recipe  "rvm"
-     #chef.add_recipe  "rvm::default"
-     #chef.add_recipe  "rvm::install"
-     #chef.add_recipe "couchdb"
+     chef.add_recipe  "rvm::install"
+     chef.add_recipe "couchdb::source"
      chef.add_recipe "our_gems"
+     chef.add_recipe "redis"
 
+     chef.log_level = :debug
 
      chef.json.merge!({
        :rvm => {
          :ruby => { :implementation => "ruby", :version => "1.9.2" }
+       },
+       :couch_db => {
+         :src_version  => "1.1.0",
+         :src_mirror   => "http://mirror.rmg.io/apache//couchdb/1.1.0/apache-couchdb-1.1.0.tar.gz",
+         :src_checksum => "7cb6a12f3becaae4eeb8ee75b15fbe6395fa7a98"
        },
      })
 

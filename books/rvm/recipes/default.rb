@@ -9,7 +9,7 @@ include_recipe "apt" if [ 'debian', 'ubuntu' ].member? node[:platform]
 package "curl"
 package "git-core"
 include_recipe "build-essential"
- 
+
 %w(libreadline5-dev zlib1g-dev libssl-dev libxml2-dev libxslt1-dev).each do |pkg|
   package pkg
 end
@@ -18,10 +18,10 @@ end
 # This is mostly to save inode space
 execute "rvm-cleanup" do
   user "root"
-  command "/usr/local/bin/rvm cleanup sources"
+  command "/usr/local/rvm/bin/rvm cleanup sources"
   action :nothing
 end
- 
+
 bash "installing system-wide RVM stable" do
   user "root"
   code "bash < <( curl -L https://rvm.beginrescueend.com/install/rvm )"
